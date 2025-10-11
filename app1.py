@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import pandas as pd
 
 # Carregar dados
-enem_es_2024 = pd.read_csv('/workspaces/streamlit_1_enem/ENEM_ES_2024_modificado.csv')
+enem_es_2024 = pd.read_csv('https://raw.githubusercontent.com/Ueliton-Oliveira/streamlit_1_enem/main/ENEM_ES_2024_modificado.csv')
 
 # Sidebar
 st.sidebar.title("Navegação do Painel")
@@ -158,6 +158,8 @@ media_geral_LC = enem_es_2024['NOTA EM LC'].mean()
 media_geral_MT = enem_es_2024['NOTA EM MT'].mean()
 media_geral_redacao = enem_es_2024['NOTA FINAL REDAÇÃO'].mean()
 st.markdown(f"<div style='color: #2274A5;'><b>Destaques:</b> Média CN: {media_geral_CN:.2f} | CH: {media_geral_CH:.2f} | LC: {media_geral_LC:.2f} | MT: {media_geral_MT:.2f} | Redação: {media_geral_redacao:.2f}</div>", unsafe_allow_html=True)
+
+
 
 
 
