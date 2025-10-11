@@ -24,9 +24,9 @@ with col1:
     <h1>Painel de Análise do ENEM 2024 - Espírito Santo</h1>
     <h2>Sobre o projeto</h2>
     <p>
-    Esta aplicação apresenta um MVP desenvolvido como parte da avaliação da disciplina de Cloud Computing na Pós-Graduação em Mineração de Dados.
+    Esta aplicação apresenta um MVP desenvolvido como parte da avaliação da disciplina de Cloud Computing na Pós-Graduação em Mineração de Dados do Instituto Federal do Espírito Santos (IFES) Campus-Serra.
     <br><br>
-    <b>Objetivo:</b> Criar um painel interativo para análise e visualização dos resultados do ENEM 2024 no estado do Espírito Santo:
+    <b>Objetivo:</b> Criar um painel interativo para análise e visualização dos resultados do ENEM 2024 no estado do Espírito Santo <span style="color:red; text-decoration: undernline;">(sem divisão de dependência administrativa):
     <ul>
       <li>Visualizar presenças e ausências nas áreas de conhecimento</li>
       <li>Visualizar quantidade de alunos para cada Língua Estrangeira</li>
@@ -35,6 +35,10 @@ with col1:
     </ul>
     </p>
     <p>
+    <span style="color:red; display:block; margin-top:12px; margin-bottom:12px;">
+    Observação importante: O código da escola indica a escola onde o aluno concluiu o Ensino Médio. Os gráficos mostram a média dos resultados dos alunos que finalizaram o Ensino Médio em cada escola, identificada pelo respectivo código. A base de dados do INEP não fornece o nome da escola, motivo pelo qual apenas o código é apresentado.
+    </span>
+    </p>            
     <b>Fonte de Dados:</b><br>
     Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)<br>
     Microdados do ENEM 2024: CN, CH, LC, MT, Redação
@@ -58,7 +62,8 @@ def filtrar_df(df, municipio, codigo_escola):
         df = df[df['NOME MUN. PROVA'] == municipio]
     if codigo_escola != 'Todos':
         df = df[df['CÓD. ESCOLA'].astype(str) == codigo_escola]
-    return df
+    return df    
+
 
 if selecao == "Presença por Área":
     colunas_presenca = ['PRESENÇA EM CN', 'PRESENÇA EM CH', 'PRESENÇA EM LC', 'PRESENÇA EM MT']
