@@ -20,8 +20,8 @@ col1, col2 = st.columns([3,1])
 with col1:
     st.markdown("""
     <div style="background: linear-gradient(90deg, #2274A5 0%, #18BC9C 100%);
-                border-radius: 12px; padding: 24px; color: white;">
-    <h1>Painel de Análise do ENEM 2024 - Espírito Santo</h1>
+                border-radius: 12px; padding: 24px; color: white; text-align: justify; hyphens: auto; width: 120%; margin-left: -20%;">
+    <h1 style="text-align:center;">Painel de Análise do ENEM 2024 - Espírito Santo</h1>
     <h2>Sobre o projeto</h2>
     <p>
     Esta aplicação apresenta um MVP desenvolvido como parte da avaliação da disciplina de Cloud Computing na Pós-Graduação em Mineração de Dados do Instituto Federal do Espírito Santos (IFES) Campus-Serra.
