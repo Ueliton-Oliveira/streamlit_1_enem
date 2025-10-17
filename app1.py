@@ -11,7 +11,8 @@ st.sidebar.title("Navegação do Painel")
 selecao = st.sidebar.radio("Selecione uma visualização", [
     "Presença por Área",
     "Distribuição por Língua Estrangeira",
-    "Notas Médias por Área"
+    "Notas Médias por Área",
+    "Ranking por Área de Conhecimento"
 ])
 
 # Capa colorida dividida em duas colunas (esquerda conteúdo, direita quadro)
@@ -150,7 +151,42 @@ elif selecao == "Notas Médias por Área":
         )
         fig2.update_layout(xaxis_title='Município', yaxis_title='Nota Média', xaxis={'categoryorder': 'total descending'})
         st.plotly_chart(fig2, use_container_width=True)
-        
+
+elif selecao == "Ranking por Área de Conhecimento":
+    colunas_para_agrupar = ['NOME MUN. PROVA', 'NOTA EM CN', 'NOTA EM CH', 'NOTA EM LC', 'NOTA EM MT', 'NOTA FINAL REDAÇÃO']
+    notas_medias_por_municipio = enem_es_2024[colunas_para_agrupar].groupby('NOME MUN. PROVA').mean().reset_index()
+    notas_medias_melted = notas_medias_por_municipio.melt(
+        id_vars='NOME MUN. PROVA',
+        var_name='Área do Conhecimento',
+        value_name='Nota Média'
+    )
+
+    for area in notas_medias_melted['Área do Conhecimento'].unique():
+        ranking_area = notas_medias_melted[notas_medias_melted['Área do Conhecimento'] == area]\
+            .sort_values(by='Nota Média', ascending=False).reset_index(drop=True)
+        ranking_area['Rank'] = ranking_area.index + 1
+
+        fig = px.bar(
+            ranking_area,
+            x='NOME MUN. PROVA',
+            y='Nota Média',
+            text='Rank',
+            title=f'Ranking de Notas Médias em {area} por Município',
+            labels={'NOME MUN. PROVA': 'Município', 'Nota Média': 'Nota Média'},
+            hover_data={
+                'Nota Média': ':.2f',  # Mostra a nota média com duas casas
+                'NOME MUN. PROVA': True,
+                'Rank': True,          # Mostra o ranking ao passar o cursor
+            }
+        )
+        fig.update_layout(
+            xaxis_title='Município',
+            yaxis_title='Nota Média',
+            xaxis={'categoryorder': 'total descending'}
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+       
 
 # Destaques automáticos para gestores
 media_geral_CN = enem_es_2024['NOTA EM CN'].mean()
