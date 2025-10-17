@@ -15,12 +15,12 @@ selecao = st.sidebar.radio("Selecione uma visualização", [
 ])
 
 # Capa colorida dividida em duas colunas (esquerda conteúdo, direita quadro)
-col1, col2 = st.columns([3,1])
+col1, col2 = st.columns([2.8,1.2])
 
 with col1:
     st.markdown("""
     <div style="background: linear-gradient(90deg, #2274A5 0%, #18BC9C 100%);
-                border-radius: 12px; padding: 24px; color: white; text-align: justify; hyphens: auto; width: 120%; margin-left: -20%;">
+                border-radius: 12px; padding: 24px; color: white; text-align: justify; hyphens: auto; width: 100%; margin-left: 0%;">
     <h1 style="text-align:center;">Painel de Análise do ENEM 2024 - Espírito Santo</h1>
     <h2>Sobre o projeto</h2>
     <p>
@@ -150,6 +150,7 @@ elif selecao == "Notas Médias por Área":
         )
         fig2.update_layout(xaxis_title='Município', yaxis_title='Nota Média', xaxis={'categoryorder': 'total descending'})
         st.plotly_chart(fig2, use_container_width=True)
+        
 
 # Destaques automáticos para gestores
 media_geral_CN = enem_es_2024['NOTA EM CN'].mean()
